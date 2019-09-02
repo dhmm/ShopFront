@@ -1,6 +1,7 @@
 body
 {
     font-family: 'Quicksand', sans-serif;
+    font-size:10pt;
 }
 .product-card
 {
@@ -13,4 +14,8 @@ body
 .product-price
 {
     font-size:16pt;    
+}
+.out-of-stock
+{
+    color:red;
 }

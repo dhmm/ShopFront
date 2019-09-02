@@ -17,7 +17,9 @@
                     <h5 class="card-title">{{ product.name }}</h5>
                     <p class="card-text">{{product.description}}</p>
                     <p class="product-price"><b>{{product.price}}</b> &euro;</p>
-                    <a href="#" class="btn btn-success">Add to card</a>
+                    <p><input class="form-control" type="number" value="0" min="0" :max="product.inStock" :disabled="product.inStock <= 0 ? 'disabled' : false"/></p>
+                    <a href="#" class="btn btn-success" v-if="product.inStock > 0">Add to card</a>
+                    <span class="out-of-stock" v-else="product.inStock < 1">Out of stock</span>
                 </div>                
             </div>      
         </div>
