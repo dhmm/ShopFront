@@ -23,3 +23,15 @@ body
 {
     margin-top:30px;
 }
+.cart ul
+{
+    list-style-type: none;
+}
+.cart ul li
+{
+    margin-bottom:15px;
+}
+.cart-count
+{
+    font-weight:bold;
+}

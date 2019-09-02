@@ -32,7 +32,7 @@
                         </form>
                         <ul class="navbar-nav">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="#"><span class="fas fa-shopping-cart"></span> Cart</a>
+                                    <a class="nav-link" href="#" data-toggle="modal" data-target="#cartModal"><span class="fas fa-shopping-cart"></span> Cart <span class="cart-count">(12)</span></a>
                                 </li>                          
                             </ul>
                     </div>
@@ -51,9 +51,36 @@
                     <span class="out-of-stock" v-else="product.inStock < 1">Out of stock</span>
                 </div>                
             </div>      
+        </div> 
+        
+        <div id="cartModal" class="modal fade cart" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Cart</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <ul>
+                            <li v-for="product in cart">{{ product.name }} <br/><input type="number" value="0"/> pcs<br/><b>12</b> &euro;</li>                            
+                        </ul>
+                        <hr/>
+                        <p>Total : <b>120</b>&euro;</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger">Clear</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Checkout</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     
+
+
     <script src="assets/vue/vue.2.6.0.js"></script>    
     <script src="assets/jquery/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>   
     <script src="assets/bootstrap/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
