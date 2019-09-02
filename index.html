@@ -9,17 +9,17 @@
     <title>Simple shop</title>
   </head>
   <body>
-    <div class="container">        
-            <div class="card product-card" style="width: 18rem;">
-                    <img src="assets/images/product.jpeg" class="card-img-top product-image" alt="product img">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <a href="#" class="btn btn-primary">Add to card</a>
-                    </div>
-                  </div>
-        <div id="app">
-            {{ message }}
+    <div id="app" class="container">    
+        <div class="row">
+            <div v-for="product in products" class="card product-card" style="width: 18rem;">
+                <img src="assets/images/product.jpeg" class="card-img-top product-image" alt="product img">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">{{product.description}}</p>
+                    <p class="product-price"><b>{{product.price}}</b> &euro;</p>
+                    <a href="#" class="btn btn-success">Add to card</a>
+                </div>                
+            </div>      
         </div>
     </div>
     

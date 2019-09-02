@@ -4,9 +4,13 @@ body
 }
 .product-card
 {
-    border:none;
+    border:none;    
 }
 .product-image
 {
     width:150px;height:150px; margin-left:auto;margin-right:auto;display:block;
+}
+.product-price
+{
+    font-size:16pt;    
 }
