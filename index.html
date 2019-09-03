@@ -32,7 +32,7 @@
                         </form>
                         <ul class="navbar-nav">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="#" data-toggle="modal" data-target="#cartModal"><span class="fas fa-shopping-cart"></span> Cart <span class="cart-count">(12)</span></a>
+                                    <a class="nav-link" href="#" data-toggle="modal" data-target="#cartModal"><span class="fas fa-shopping-cart"></span> Cart <span class="cart-count">( {{cartCount}} )</span></a>
                                 </li>                          
                             </ul>
                     </div>
@@ -67,10 +67,10 @@
                             <li v-for="product in cart">{{ product.name }} <br/><input type="number" value="0"/> pcs<br/><b>12</b> &euro;</li>                            
                         </ul>
                         <hr/>
-                        <p>Total : <b>120</b>&euro;</p>
+                        <p>Total : <b>{{cartTotal}}</b>&euro;</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger">Clear</button>
+                        <button @click="clear" type="button" class="btn btn-danger">Clear</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary">Checkout</button>
                     </div>

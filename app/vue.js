@@ -10,13 +10,20 @@ var app = new Vue({
         cart: [
             { id:1, name: 'Product 1' , price : 10.00 , quantity: 2 } ,
             { id:1, name: 'Product 4' , price : 8.00 , quantity: 20 } 
-        ]
+        ] ,
+        cartTotal: 120,
+        cartCount: 2
     } , 
     methods: {
         search : function() {
             this.products =  [
                 { id:1, name: 'Product 1' , description:'Sed vitae sapien ut metus ultricies pulvinar vitae tempus ante. Duis condimentum hendrerit blandit.', price : 10.00 , inStock: 10 } 
             ]
+        } ,
+        clear : function() {
+            this.cart = null;
+            this.cartTotal = 0;
+            this.cartCount = 0;
         }
     }    
 })
