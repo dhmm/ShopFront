@@ -91,15 +91,15 @@ var app = new Vue({
             } 
         },
         removeFromCart(productId) {
-            this.cartTotal = 0;  
+            this.cartTotal = 0;              
             if(this.cart != null){
                 this.cart.forEach( (cartProduct, index) => {
                     if(cartProduct.id == productId) {                                                
                         this.cart.splice(index , 1);   
-                        this.cartCount--;                       
+                        this.cartCount-=cartProduct.quantity;                       
                     }
                     else {
-                        this.cartTotal += cartProduct.totalPrice;                        
+                        this.cartTotal += cartProduct.totalPrice;                       
                     }
                 });
             } 
