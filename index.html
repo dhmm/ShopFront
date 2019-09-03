@@ -28,7 +28,7 @@
                         </ul>
                         <form class="form-inline my-2 my-lg-0">
                             <input class="form-control mr-sm-2" type="search" placeholder="Search a product" aria-label="Search">
-                            <a href="#" @click="search" class="btn btn-outline-success my-2 my-sm-0">Search</a>
+                            <a href="#" v-on:click="search" class="btn btn-outline-success my-2 my-sm-0">Search</a>
                         </form>
                         <ul class="navbar-nav">
                                 <li class="nav-item active">
@@ -45,9 +45,8 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ product.name }}</h5>
                     <p class="card-text">{{product.description}}</p>
-                    <p class="product-price"><b>{{product.price}}</b> &euro;</p>
-                    <p><input class="form-control" type="number" value="0" min="0" :max="product.inStock" :disabled="product.inStock <= 0 ? 'disabled' : false"/></p>
-                    <a href="#" class="btn btn-success" v-if="product.inStock > 0">Add to card</a>
+                    <p class="product-price"><b>{{product.price}}</b> &euro;</p>                    
+                    <a href="#" v-on:click="addToCart(product.id)" class="btn btn-success" v-if="product.inStock > 0">Add to card</a>
                     <span class="out-of-stock" v-else="product.inStock < 1">Out of stock</span>
                 </div>                
             </div>      
@@ -64,13 +63,19 @@
                     </div>
                     <div class="modal-body">
                         <ul>
-                            <li v-for="product in cart">{{ product.name }} <br/><input type="number" value="0"/> pcs<br/><b>12</b> &euro;</li>                            
+                            <li v-for="product in cart"><b>{{ product.name }}</b><br/>
+                                Price : <b>{{product.productPrice}}</b> &euro;<br/>
+                                <span class="cart-product-quantity">Quantity : <b>{{product.quantity}}</b> pcs</span><br/>                                
+                                <button v-on:click="decreaseCart(product.id)" class="btn btn-sm btn-warning" type="button">-</button>
+                                <button v-on:click="addToCart(product.id)" class="btn btn-sm btn-primary" type="button">+</button>                                
+                                <button v-on:click="removeFromCart(product.id)" class="btn btn-sm btn-danger" type="button">Remove</button>
+                               </li>                            
                         </ul>
                         <hr/>
                         <p>Total : <b>{{cartTotal}}</b>&euro;</p>
                     </div>
                     <div class="modal-footer">
-                        <button @click="clear" type="button" class="btn btn-danger">Clear</button>
+                        <button v-on:click="clear" type="button" class="btn btn-danger">Clear</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary">Checkout</button>
                     </div>

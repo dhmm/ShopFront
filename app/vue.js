@@ -7,12 +7,9 @@ var app = new Vue({
             { id:3, name: 'Product 3' , description:'Sed vitae sapien ut metus ultricies pulvinar vitae tempus ante. Duis condimentum hendrerit blandit.', price : 33.00 , inStock: 0 } ,
             { id:4, name: 'Product 4' , description:'Sed vitae sapien ut metus ultricies pulvinar vitae tempus ante. Duis condimentum hendrerit blandit.', price : 8.00 , inStock: 45 }
         ],
-        cart: [
-            { id:1, name: 'Product 1' , price : 10.00 , quantity: 2 } ,
-            { id:1, name: 'Product 4' , price : 8.00 , quantity: 20 } 
-        ] ,
-        cartTotal: 120,
-        cartCount: 2
+        cart: new Array() ,
+        cartTotal: 0,
+        cartCount: 0
     } , 
     methods: {
         search : function() {
@@ -21,9 +18,91 @@ var app = new Vue({
             ]
         } ,
         clear : function() {
-            this.cart = null;
+            this.cart = new Array();
             this.cartTotal = 0;
             this.cartCount = 0;
+        },
+        addToCart: function(productId) {
+            //Get product from product list and decrease stock
+            let findedProduct = null;
+            if(this.products != null){
+                this.products.forEach( (product,index) => {
+                    if(product.id == productId)
+                    {
+                        if(product.inStock == 0){
+                            alert('There isn\'t product in the stock');
+                            return;
+                        }
+                        findedProduct = product;
+                        product.inStock--;                                            
+                    }
+                });
+            }
+            if(findedProduct != null) {
+                let productInCart = false;   
+                this.cartTotal = 0; 
+                if(this.cart != null){
+                    this.cart.forEach( (cartProduct, index) => {
+                        if(cartProduct.id == productId) {
+                            productInCart=true;
+                            cartProduct.quantity++;                            
+                            cartProduct.totalPrice = cartProduct.productPrice * cartProduct.quantity;                                                     
+                            this.cartCount++;                            
+                        }
+                        this.cartTotal += cartProduct.totalPrice;                        
+                    });
+                } 
+                if(!productInCart) {                    
+                    this.cart.push(
+                        { id: findedProduct.id  , name: findedProduct.name, productPrice: findedProduct.price , totalPrice: findedProduct.price  , quantity: 1 }
+                    );      
+                    this.cartTotal+=findedProduct.price;                    
+                    this.cartCount++;
+                }
+            }            
+        },
+        getStockQuantity: function(productId) {
+            if(this.products != null){
+                this.products.forEach( (product,index) => {
+                    if(product.id == productId)
+                    {
+                        return product.inStock;                                           
+                    }
+                });
+            }
+            return 0;
+        },
+        decreaseCart(productId) {  
+            this.cartTotal = 0;          
+            if(this.cart != null){
+                this.cart.forEach( (cartProduct, index) => {
+                    if(cartProduct.id == productId) {                        
+                        cartProduct.quantity--;                            
+                        cartProduct.totalPrice = cartProduct.productPrice * cartProduct.quantity;                                                     
+                        this.cartCount--;  
+                        if(cartProduct.quantity == 0) {
+                            this.cart.splice(index , 1);
+                        }                          
+                    }
+                    else {
+                        this.cartTotal += cartProduct.totalPrice;                        
+                    }
+                });
+            } 
+        },
+        removeFromCart(productId) {
+            this.cartTotal = 0;  
+            if(this.cart != null){
+                this.cart.forEach( (cartProduct, index) => {
+                    if(cartProduct.id == productId) {                                                
+                        this.cart.splice(index , 1);   
+                        this.cartCount--;                       
+                    }
+                    else {
+                        this.cartTotal += cartProduct.totalPrice;                        
+                    }
+                });
+            } 
         }
     }    
 })
